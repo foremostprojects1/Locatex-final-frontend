@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <title>Locatex | Find a Broker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+
+  <!-- External CSS libraries -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="css/leaflet.css" type="text/css">
+  <link rel="stylesheet" href="css/map.css" type="text/css">
+  <script src="js/env.js"></script>
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" type="text/css" href="fonts/linearicons/style.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" type="text/css" href="css/dropzone.css">
+  <link rel="stylesheet" type="text/css" href="css/slick.css">
+
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" id="style_sheet" href="css/skins/default.css">
+
+  <!-- Favicon icon -->
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+  <!-- Google fonts -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CRoboto:300,400,500,700&display=swap">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="js/ie-emulation-modes-warning.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /* Enhanced Input Styling similar to submit-property.html */
+        .sidebar .advanced-search .input-text {
+            width: 100%;
+            padding: 10px 17px;
+            font-size: 15px;
+            border: 1px solid #d0cece;
+            outline: none;
+            color: #565656;
+            height: 45px;
+            border-radius: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .advanced-search .input-text:focus {
+            border-color: #274abb;
+            box-shadow: 0 0 5px rgba(39, 74, 187, 0.2);
+        }
+
+        .sidebar .advanced-search label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="page_loader"></div>
+
+  <!-- Header Include -->
+  <div id="header-container"></div>
+
+  <!-- Sub banner start -->
+  <div class="sub-banner">
+    <div class="container">
+      <div class="page-name">
+        <h1>Find a Broker</h1>
+        <ul>
+          <li><a href="index.html">Index</a></li>
+          <li><span>/</span>Find a Broker</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agent section body start -->
+  <div class="content-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-12">
+          <!-- Option bar start -->
+          <div class="option-bar">
+            <div class="float-left">
+              <h4>
+                <span class="heading-icon">
+                  <i class="fa fa-th-list"></i>
+                </span>
+                <span class="title-name">Brokers List</span>
+              </h4>
+            </div>
+            <div class="float-right cod-pad">
+              <span id="resultsCount" class="badge badge-primary" style="margin-left:8px;">0</span>
+            </div>
+          </div>
+          <!-- Dynamic list mount point -->
+          <div id="dynamicListMount"></div>
+          <!-- Pagination container -->
+          <div id="pagination-container"></div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="sidebar-right">
+            <!-- Filter Search -->
+            <div class="sidebar widget advanced-search">
+              <h3 class="sidebar-title">Filter Brokers</h3>
+              <div class="s-border"></div>
+              <div class="m-border"></div>
+              <form id="brokerFilterForm" method="GET">
+                <div class="form-group">
+                  <label>District</label>
+                  <input type="text" class="input-text" name="district" placeholder="Enter District">
+                </div>
+                <div class="form-group">
+                  <label>Village</label>
+                  <input type="text" class="input-text" name="village" placeholder="Enter Village">
+                </div>
+                
+                <div class="form-group mb-0">
+                  <button type="submit" class="btn btn-lg btn-theme btn-block" style="width: 100%; border-radius: 30px;">Search</button>
+                  <button type="button" id="resetButton" class="btn btn-lg btn-white-lg-outline btn-block mt-3" style="width: 100%; border-radius: 30px; color: #333; border-color: #333;">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer start -->
+  <div id="footer-container"></div>
+
+  <script src="js/jquery-2.2.0.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-submenu.js"></script>
+  <script src="js/rangeslider.js"></script>
+  <script src="js/jquery.mb.YTPlayer.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/bootstrap-select.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.scrollUp.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/leaflet.js"></script>
+  <script src="js/leaflet-providers.js"></script>
+  <script src="js/leaflet.markercluster.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/slick.min.js"></script>
+  <script src="js/jquery.filterizr.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/jquery.countdown.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+  <script>
+    (function () {
+      var API_BASE = window.API_BASE_URL || 'http://localhost:5000';
+      var mount = document.getElementById('dynamicListMount');
+      
+      var itemsPerPage = 5;
+      var currentPage = 1;
+      var totalPages = 1;
+      var allAgents = [];
+
+      function fetchAgents(params = {}) {
+        var query = new URLSearchParams(params).toString();
+        var url = `${API_BASE}/api/agents?${query}`;
+
+        fetch(url)
+          .then(res => res.json())
+          .then(res => {
+            if (res.status === 'success') {
+              allAgents = res.data.agents; // Assuming updated getAgents returns { status: 'success', data: { agents: [...] } }
+              // Wait, previous getAgents might return just array or object with count.
+              // Let's assume standard response format.
+              // Actually, I updated getAgents in backend. Let's recall/check.
+              // Step 35: Updated getAgents.
+              // It returns distinct agents? No, it returns list.
+              // Controller: res.status(200).json({ status: 'success', count: agents.length, data: agents });
+              // So res.data is the array of agents.
+              // Correction: res.data is the array.
+              if (Array.isArray(res.data)) {
+                 allAgents = res.data;
+              } else {
+                 allAgents = [];
+              }
+              
+              document.getElementById('resultsCount').textContent = allAgents.length;
+              calculatePagination();
+              renderPage(1);
+            } else {
+              mount.innerHTML = '<div class="alert alert-danger">Error loading brokers.</div>';
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            mount.innerHTML = '<div class="alert alert-danger">Network error.</div>';
+          });
+      }
+
+      function calculatePagination() {
+        totalPages = Math.ceil(allAgents.length / itemsPerPage);
+        renderPagination();
+      }
+
+      function renderPage(page) {
+        currentPage = page;
+        var start = (page - 1) * itemsPerPage;
+        var end = start + itemsPerPage;
+        var pageAgents = allAgents.slice(start, end);
+        
+        if (pageAgents.length === 0) {
+           mount.innerHTML = '<div class="alert alert-info">No brokers found matching your criteria.</div>';
+           return;
+        }
+
+        var html = pageAgents.map(agent => {
+            var user = agent.user || {};
+            var company = agent.company || {};
+            var avatar = user.avatar || 'img/avatar/avatar-1.png'; // Default avatar
+            var name = user.name || 'Unknown Agent';
+            var email = user.email || '';
+            var phone = user.phone || '';
+            var desc = agent.description || 'No description available.';
+            
+            var location = [];
+            if(company.village) location.push(company.village);
+            if(company.taluka) location.push(company.taluka);
+            if(company.district) location.push(company.district);
+            var locationStr = location.join(', ');
+
+            return `
+            <div class="property-box-2" style="margin-bottom: 30px;">
+                <div class="row no-gutters">
+                    <div class="col-lg-4 col-md-5">
+                        <div class="property-img">
+                            <img src="${avatar}" alt="agent" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover; max-height: 250px;">
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="detail" style="padding: 20px;">
+                            <div class="heading">
+                                <h3 class="title">
+                                    <a href="#">${name}</a>
+                                </h3>
+                                <div class="location">
+                                    <a href="#">
+                                        <i class="flaticon-location"></i> ${locationStr || 'Location not specified'}
+                                    </a>
+                                </div>
+                            </div>
+                            <p>${desc}</p>
+                            <ul class="facilities-list clearfix">
+                                <li>
+                                    <i class="flaticon-call-center-agent"></i> ${phone}
+                                </li>
+                                <li>
+                                    <i class="flaticon-mail"></i> ${email}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
+        
+        mount.innerHTML = html;
+        renderPagination();
+      }
+
+      function renderPagination() {
+        var container = document.getElementById('pagination-container');
+        if (totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        var html = '<nav aria-label="Page navigation"><ul class="pagination justify-content-center">';
+        
+        // Prev
+        if (currentPage > 1) {
+            html += `<li class="page-item"><a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">&laquo;</a></li>`;
+        }
+
+        // Numbers
+        for (var i = 1; i <= totalPages; i++) {
+            var active = i === currentPage ? 'active' : '';
+            html += `<li class="page-item ${active}"><a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a></li>`;
+        }
+
+        // Next
+        if (currentPage < totalPages) {
+            html += `<li class="page-item"><a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">&raquo;</a></li>`;
+        }
+
+        html += '</ul></nav>';
+        container.innerHTML = html;
+      }
+
+      window.changePage = function(page) {
+          renderPage(page);
+      };
+
+      // Form Handling
+      document.getElementById('brokerFilterForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var fd = new FormData(this);
+          var params = {};
+          if(fd.get('district')) params.district = fd.get('district');
+          if(fd.get('village')) params.village = fd.get('village');
+          fetchAgents(params);
+      });
+
+      document.getElementById('resetButton').addEventListener('click', function() {
+          document.getElementById('brokerFilterForm').reset();
+          fetchAgents();
+      });
+
+      // Initial Load
+      fetchAgents();
+
+    })();
+  </script>
+</body>
+</html>

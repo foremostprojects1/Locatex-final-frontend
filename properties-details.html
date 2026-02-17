@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Locatex | Buy & Sell Real Estate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="css/map.css" type="text/css">
+    <script src="js/env.js"></script>
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="css/skins/default.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CRoboto:300,400,500,700&display=swap">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="page_loader"></div>
+
+    <!-- Header Include -->
+    <div id="header-container"></div>
+
+
+
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="container">
+            <div class="page-name">
+                <h1>Properties Detail</h1>
+                <ul>
+                    <li><a href="index.html">Index</a></li>
+                    <li><span>/</span>Properties Detail</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Properties Details page start -->
+    <div class="properties-details-page content-area-7">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="properties-details-section">
+                        <div class="mb-30">
+                            <div class="heading-properties-2 pd-header">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h3 id="propTitle" class="pd-title">Property</h3>
+                                        <p class="pd-location"><i class="fa fa-map-marker"></i> <span
+                                                id="propAddress">Location</span></p>
+                                    </div>
+                                    <div class="col-md-4 text-md-right text-left">
+                                        <h3 class="pd-price" id="propPrice"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-gallery-wrap">
+                                <div class="property-gallery-slider" id="propGallerySlider"></div>
+                                <div class="property-gallery-thumbs" id="propGalleryThumbs"></div>
+                            </div>
+                        </div>
+                        <!-- Advanced search start -->
+
+                        <!-- Tabbing box start -->
+                        <div class="tabbing tabbing-box tb-2 mb-40">
+                            <ul class="nav nav-tabs" id="carTab" role="tablist">
+                                <!-- <li class="nav-item">
+                                <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Floor Plans</a>
+                            </li> -->
+                                <li class="nav-item active show">
+                                    <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab"
+                                        aria-controls="three" aria-selected="true">Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one"
+                                        aria-selected="false">Description</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                <a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">Video</a>
+                            </li> -->
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab"
+                                        aria-controls="5" aria-selected="true">Location</a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" id="6-tab" data-toggle="tab" href="#6" role="tab"
+                                        aria-controls="6" aria-selected="true">Similar Properties</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="carTabContent">
+                                <div class="tab-pane fade" id="one" role="tabpanel"
+                                    aria-labelledby="one-tab">
+                                    <div class="properties-description mb-50">
+                                        <h3 class="heading-2">Description</h3>
+                                        <p id="propDescription"></p>
+                                    </div>
+                                </div>
+                                <!-- Floor plans removed for Land Properties -->
+                                <div class="tab-pane fade  active show" id="three" role="tabpanel" aria-labelledby="three-tab">
+                                    <!-- Enhanced Property Details -->
+                                    <div class="property-details mb-40">
+                                        <h3 class="heading-2">Complete Property Information</h3>
+
+                                        <!-- Basic Information -->
+                                        <div class="details-section mb-4">
+                                            <h5 class="section-title">BASIC INFORMATION</h5>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <ul class="details-list">
+                                                        <li><strong class="text-uppercase">Status:</strong> <span
+                                                                id="detailStatus" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">Property Type:</strong> <span
+                                                                id="detailType" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">Price:</strong> <span
+                                                                id="detailPrice"
+                                                                class="detail-value text-success font-weight-bold"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Area Details -->
+
+                                        <div class="details-section mb-4" id="areaDetailsSection">
+                                            <h5 class="section-title">AREA DETAILS</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="area-card">
+                                                        <i class="flaticon-square area-icon"></i>
+                                                        <p class="area-label">TOTAL AREA (ACRES)</p>
+                                                        <h4 id="detailTotalArea" class="area-value">-</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Location Details -->
+                                        <div class="details-section mb-4">
+                                            <h5 class="section-title">LOCATION DETAILS</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul class="details-list">
+                                                        <li><strong class="text-uppercase">State:</strong> <span
+                                                                id="detailState" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">District:</strong> <span
+                                                                id="detailDistrict" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">Taluka:</strong> <span
+                                                                id="detailTaluka" class="detail-value"></span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="details-list">
+                                                        <li><strong class="text-uppercase">Village:</strong> <span
+                                                                id="detailVillage" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">City:</strong> <span
+                                                                id="detailCity" class="detail-value"></span></li>
+                                                        <li><strong class="text-uppercase">Pin Code:</strong> <span
+                                                                id="detailZipCode" class="detail-value"></span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-12 mt-2" id="fullAddress">
+                                                    <p class="mb-0"><i class="fa fa-map-marker text-primary"></i>
+                                                        <strong class="text-uppercase">Full Address:</strong>
+                                                    </p>
+                                                    <p id="detailAddress" class="detail-value ml-4"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Amenities Section -->
+                                        <div class="details-section mb-4" id="amenitiesSection" style="display:none;">
+                                            <h5 class="section-title">AMENITIES & FEATURES</h5>
+                                            <div id="amenitiesList" class="amenities-grid row">
+                                                <!-- Amenities will be populated here -->
+                                            </div>
+                                        </div>
+
+                                        <!-- Contact Information -->
+                                        <div class="details-section mb-4">
+                                            <h5 class="section-title">CONTACT INFORMATION</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul class="details-list">
+                                                        <li><strong class="text-uppercase">Contact Name:</strong>
+                                                            <span class="detail-value">
+                                                                <span id="detailContactName"></span>
+                                                                <span id="detailContactBadge" class="badge ml-2"
+                                                                    style="display:none"></span>
+                                                            </span>
+                                                        </li>
+                                                        <li><strong class="text-uppercase">Email:</strong> <span
+                                                                id="detailContactEmail" class="detail-value"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="details-list">
+                                                        <li><strong class="text-uppercase">Phone:</strong> <span
+                                                                id="detailContactPhone" class="detail-value"></span>
+                                                        </li>
+                                                        <li id="whatsappRow" style="display:none;"><strong
+                                                                class="text-uppercase">WhatsApp:</strong> <span
+                                                                id="detailWhatsApp" class="detail-value"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- CSS for Enhanced Details -->
+                                    <style>
+                                        .details-section {
+                                            background: #f8f9fa;
+                                            padding: 20px;
+                                            border-radius: 8px;
+                                            border-left: 4px solid #007bff;
+                                        }
+
+                                        .section-title {
+                                            color: #007bff;
+                                            font-weight: 700;
+                                            font-size: 16px;
+                                            margin-bottom: 20px;
+                                            letter-spacing: 1px;
+                                            text-transform: uppercase;
+                                            border-bottom: 2px solid #007bff;
+                                            padding-bottom: 10px;
+                                        }
+
+                                        .details-list {
+                                            list-style: none;
+                                            padding: 0;
+                                            margin: 0;
+                                        }
+
+                                        .details-list li {
+                                            padding: 10px 0;
+                                            border-bottom: 1px solid #e0e0e0;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                        }
+
+                                        .details-list li:last-child {
+                                            border-bottom: none;
+                                        }
+
+                                        .details-list strong {
+                                            color: #333;
+                                            font-size: 13px;
+                                            font-weight: 600;
+                                            min-width: 140px;
+                                        }
+
+                                        .detail-value {
+                                            color: #666;
+                                            font-size: 14px;
+                                            text-align: right;
+                                            flex: 1;
+                                        }
+
+                                        .area-card {
+                                            background: white;
+                                            padding: 20px;
+                                            border-radius: 8px;
+                                            text-align: center;
+                                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                                            transition: transform 0.3s ease;
+                                        }
+
+                                        .area-card:hover {
+                                            transform: translateY(-5px);
+                                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                        }
+
+                                        .area-icon {
+                                            font-size: 32px;
+                                            color: #007bff;
+                                            margin-bottom: 10px;
+                                        }
+
+                                        .area-label {
+                                            color: #666;
+                                            font-size: 12px;
+                                            font-weight: 600;
+                                            margin: 10px 0;
+                                            letter-spacing: 0.5px;
+                                        }
+
+                                        .area-value {
+                                            color: #333;
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            margin: 0;
+                                        }
+
+                                        .amenities-grid {
+                                            display: grid;
+                                            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                                            gap: 15px;
+                                            margin-top: 15px;
+                                        }
+
+                                        .amenity-item {
+                                            background: white;
+                                            padding: 15px;
+                                            border-radius: 6px;
+                                            display: flex;
+                                            align-items: center;
+                                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+                                            transition: all 0.3s ease;
+                                        }
+
+                                        .amenity-item:hover {
+                                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+                                            transform: translateY(-2px);
+                                        }
+
+                                        .amenity-icon {
+                                            font-size: 24px;
+                                            color: #28a745;
+                                            margin-right: 12px;
+                                            min-width: 24px;
+                                        }
+
+                                        .amenity-name {
+                                            color: #333;
+                                            font-size: 13px;
+                                            font-weight: 500;
+                                            text-transform: capitalize;
+                                        }
+
+                                        @media (max-width: 768px) {
+                                            .details-list strong {
+                                                min-width: 100px;
+                                                font-size: 12px;
+                                            }
+
+                                            .detail-value {
+                                                font-size: 13px;
+                                            }
+
+                                            .amenities-grid {
+                                                grid-template-columns: 1fr;
+                                            }
+                                        }
+                                    </style>
+                                </div>
+                                <div class="tab-pane fade " id="4" role="tabpanel" aria-labelledby="4-tab">
+                                    <div class="inside-properties mb-50">
+                                        <h3 class="heading-2">
+                                            Property Video
+                                        </h3>
+                                        <iframe src="https://www.youtube.com/embed/5e0LxrLSzok"
+                                            allowfullscreen=""></iframe>
+                                    </div>
+                                </div>
+                                <!-- <div class="tab-pane fade " id="5" role="tabpanel" aria-labelledby="5-tab">
+                                    <div class="location mb-50">
+                                        <div class="map">
+                                            <h3 class="heading-2">Property Location</h3>
+                                            <div id="contactMap" class="contact-map" style="height:400px;width:100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="tab-pane fade " id="6" role="tabpanel" aria-labelledby="6-tab">
+                                    <div class="similar-properties mb-30">
+                                        <h3 class="heading-2">Similar Properties</h3>
+                                        <div class="row" id="similarPropertiesRow">
+                                            <!-- Dynamic Content -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer start -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Footer is now loaded automatically by js/app.js
+    </script>
+
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-submenu.js"></script>
+    <script src="js/rangeslider.js"></script>
+    <script src="js/jquery.mb.YTPlayer.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.scrollUp.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/jquery.filterizr.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Google Maps API -->
+    <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual Google Maps API key -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASvsUsXr5DtzDSLKvk5Tzc439i8k3fOfM&libraries=places"></script>
+
+    <script>
+        (function () {
+            // Use Global API_BASE_URL
+            var API_BASE = window.API_BASE_URL || 'http://localhost:5000';
+            function qs(name) {
+                var params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+            function setText(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || ''; }
+            function formatCurrency(n) {
+                if (!n && n !== 0) return '';
+                try { return '₹ ' + Number(n).toLocaleString(); } catch (e) { return n; }
+            }
+
+            function renderImages(images) {
+                var slider = document.getElementById('propGallerySlider');
+                var thumbs = document.getElementById('propGalleryThumbs');
+                if (!slider || !thumbs) return;
+                slider.innerHTML = '';
+                thumbs.innerHTML = '';
+                var list = (images && images.length) ? images : [{ url: 'img/no-photo-land.png', alt: 'Property' }];
+                list.forEach(function (img, idx) {
+                    var s = document.createElement('div');
+                    s.className = 'pg-slide';
+                    s.innerHTML = '<img src="' + img.url + '" alt="slide">';
+                    slider.appendChild(s);
+
+                    var t = document.createElement('div');
+                    t.className = 'pg-thumb' + (idx === 0 ? ' active' : '');
+                    t.innerHTML = '<img src="' + img.url + '" alt="thumb">';
+                    t.addEventListener('click', function () {
+                        slider.scrollTo({ left: slider.clientWidth * idx, behavior: 'smooth' });
+                        Array.prototype.forEach.call(thumbs.children, function (ch) { ch.classList.remove('active'); });
+                        t.classList.add('active');
+                    });
+                    thumbs.appendChild(t);
+                });
+            }
+
+            function initMap(lat, lng, address) {
+                try {
+                    var latitude = Number(lat);
+                    var longitude = Number(lng);
+
+                    // ✅ Validate ranges
+                    if (!isFinite(latitude) || !isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+                        console.warn('Invalid coordinates, defaulting to Ahmedabad');
+                        latitude = 23.0229652;
+                        longitude = 72.6544334;
+                        address = address || 'Ahmedabad, Gujarat';
+                    }
+
+                    var loc = { lat: latitude, lng: longitude };
+                    var mapContainer = document.getElementById('contactMap');
+                    if (!mapContainer) { console.error('Map container not found'); return; }
+                    mapContainer.innerHTML = '';
+
+                    var map = new google.maps.Map(mapContainer, {
+                        zoom: 16,
+                        center: loc,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        mapTypeControl: true,
+                        streetViewControl: true,
+                        fullscreenControl: true,
+                        zoomControl: true,
+                        gestureHandling: 'greedy'
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: loc,
+                        map: map,
+                        title: 'Property Location',
+                        animation: google.maps.Animation.DROP
+                    });
+
+                    // ✅ Show dynamic property address
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: `<div style="padding:10px;"><strong>Property Location</strong><br>${address || 'Location not available'}</div>`
+                    });
+
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+
+
+                } catch (e) {
+                    console.error('Map initialization error:', e);
+                }
+            }
+
+            function load() {
+                var id = qs('id');
+                if (!id) { return; }
+                fetch(API_BASE + '/api/properties/' + id)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (!data || data.status !== 'success' || !data.data || !data.data.property) return;
+                        var p = data.data.property;
+                        setText('propTitle', p.title);
+                        setText('propPrice', formatCurrency(p.price));
+                        setText('propAddress', (p.location && (p.location.address || '')) + (p.location && p.location.city ? ', ' + p.location.city : ''));
+                        setText('propDescription', p.description || '');
+                        setText('propId', p._id);
+                        setText('propStatus', p.status);
+                        setText('propType', p.type);
+                        setText('propBhk', p.bhk || '-');
+                        setText('propArea', p.totalArea ? (p.totalArea + ' SqFt') : '-');
+                        setText('propParking', p.carParking || '-');
+                        setText('propAge', p.buildingAge || '-');
+                        setText('propZip', p.location && p.location.zipCode || '');
+                        setText('propCity', p.location && p.location.city || '');
+                        setText('propState', p.location && p.location.state || '');
+                        setText('propApproval', p.approvalStatus || 'pending');
+                        setText('propOwner', (p.owner && p.owner.name) || '');
+                        renderImages(p.images);
+
+                        // ✅ Populate Enhanced Property Details Tab
+                        try {
+                            // Basic Information
+                            setText('detailStatus', (p.status || '').toUpperCase().replace(/-/g, ' '));
+                            setText('detailType', (p.type || '').toUpperCase());
+                            setText('detailPrice', formatCurrency(p.price));
+                            setText('detailViews', p.views || '0');
+
+                            // Format dates
+                            function formatDate(dateStr) {
+                                if (!dateStr) return 'N/A';
+                                try {
+                                    var d = new Date(dateStr);
+                                    return d.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+                                } catch (e) {
+                                    return 'N/A';
+                                }
+                            }
+                            setText('detailCreatedAt', formatDate(p.createdAt));
+                            setText('detailUpdatedAt', formatDate(p.updatedAt));
+
+                            // Area Details
+                            setText('detailTotalArea', p.totalArea ? p.totalArea + ' Acres' : 'N/A');
+
+                            // Show Vigha/Acre cards if available
+                            if (p.areaVigha && p.areaVigha > 0) {
+                                setText('detailAreaVigha', p.areaVigha + ' Vigha');
+                                document.getElementById('vighaCard').style.display = '';
+                            }
+                            if (p.areaAcre && p.areaAcre > 0) {
+                                setText('detailAreaAcre', p.areaAcre + ' Acres');
+                                document.getElementById('acreCard').style.display = '';
+                            }
+
+                            // Location Details
+                            setText('detailState', (p.location && p.location.state) || 'N/A');
+                            setText('detailDistrict', (p.location && p.location.district) || 'N/A');
+                            setText('detailTaluka', (p.location && p.location.taluka) || 'N/A');
+                            setText('detailVillage', (p.location && p.location.village) || 'N/A');
+                            setText('detailCity', (p.location && p.location.city) || 'N/A');
+                            setText('detailZipCode', (p.location && p.location.zipCode) || 'N/A');
+                            setText('detailAddress', (p.location && p.location.address) || 'N/A');
+
+                            // Amenities & Features (Simple Text List)
+                            if (p.amenities && p.amenities.length > 0) {
+                                var amenitiesContainer = document.getElementById('amenitiesList');
+                                amenitiesContainer.innerHTML = '';
+
+                                p.amenities.forEach(function (amenity) {
+                                    var div = document.createElement('div');
+                                    div.className = 'col-md-4 col-sm-6 col-12 mb-3';
+                                    div.innerHTML = `
+                                        <div class="d-flex align-items-center p-2" style="width: max-content;
+">
+                                            <i class="fa fa-check-circle text-success mr-2" style="font-size: 16px;"></i>
+                                            <span style="font-weight: 500; font-size: 12px; text-transform: capitalize; color: #555;">
+                                                ${amenity.replace(/_/g, ' ').replace(/passing/g, 'Passing')}
+                                            </span>
+                                        </div>
+                                    `;
+                                    amenitiesContainer.appendChild(div);
+                                });
+
+                                document.getElementById('amenitiesSection').style.display = '';
+                            }
+
+                            // Contact Information
+                            // Contact Information
+                            var contactName = (p.contactInfo && p.contactInfo.name) || (p.owner && p.owner.name) || 'N/A';
+                            setText('detailContactName', contactName);
+
+                            // Role Badge
+                            var role = (p.owner && p.owner.role === 'agent') ? 'Broker' : 'Owner';
+                            var badgeEl = document.getElementById('detailContactBadge');
+                            if (badgeEl) {
+                                badgeEl.textContent = role;
+                                badgeEl.className = 'badge ml-2 ' + (role === 'Broker' ? 'badge-primary' : 'badge-secondary');
+                                badgeEl.style.display = 'inline-block';
+                            }
+
+                            setText('detailContactEmail', (p.contactInfo && p.contactInfo.email) || 'N/A');
+                            setText('detailContactPhone', (p.contactInfo && p.contactInfo.phone) || 'N/A');
+
+                            if (p.contactInfo && p.contactInfo.whatsappNumber) {
+                                setText('detailWhatsApp', p.contactInfo.whatsappNumber);
+                                document.getElementById('whatsappRow').style.display = '';
+                            }
+
+                                    // Fetch Similar Properties (Same District)
+                                    var similarUrl = API_BASE + '/api/properties?limit=3';
+                                    if(p.location && p.location.district) {
+                                        similarUrl += '&district=' + encodeURIComponent(p.location.district);
+                                    }
+
+                                    fetch(similarUrl)
+                                        .then(function (r) { return r.json(); })
+                                        .then(function (res) {
+                                            if (res.status === 'success' && res.data && res.data.properties) {
+                                                var list = res.data.properties.filter(function(item) { return item._id !== p._id; });
+                                                
+                                                var container = document.getElementById('similarPropertiesRow');
+                                                if (container && list.length > 0) {
+                                                    container.innerHTML = list.slice(0, 3).map(function(sim) {
+                                                        var img = (sim.images && sim.images.length > 0) ? sim.images[0].url : 'img/no-photo-land.png';
+                                                        var link = 'properties-details.html?id=' + sim._id;
+                                                        
+                                                        return '<div class="col-lg-4 col-md-6 col-sm-12">' +
+                                                            '<div class="property-box-3">' +
+                                                                '<div class="property-thumbnail">' +
+                                                                    '<a href="' + link + '" class="property-img">' +
+                                                                        '<div class="tag-2 bg-active">' + (sim.status || 'For Sale').toUpperCase() + '</div>' +
+                                                                        '<img class="d-block w-100" src="' + img + '" alt="property" style="height: 250px; object-fit: cover;">' +
+                                                                        '<div class="facilities-list clearfix">' +
+                                                                            '<ul class="facilities-list clearfix">' +
+                                                                                '<li><i class="flaticon-square"></i> ' + (sim.totalArea || '-') + ' Acres</li>' +
+                                                                            '</ul>' +
+                                                                        '</div>' +
+                                                                    '</a>' +
+                                                                '</div>' +
+                                                                '<div class="detail">' +
+                                                                    '<h1 class="title"><a href="' + link + '">' + (sim.title || 'Property') + '</a></h1>' +
+                                                                    '<div class="location"><a href="' + link + '"><i class="flaticon-location"></i> ' + ((sim.location && sim.location.city) || 'Location N/A') + '</a></div>' +
+                                                                    '<ul class="facilities-list clearfix">' +
+                                                                        '<li>' + formatCurrency(sim.price) + '</li>' +
+                                                                    '</ul>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                        '</div>';
+                                                    }).join('');
+                                                } else {
+                                                    if(container) container.innerHTML = '<div class="col-12"><p>No similar properties found.</p></div>';
+                                                }
+                                            }
+                                        })
+                                        .catch(function (e) { console.error('Error fetching similar', e); });
+
+                        } catch (e) {
+                            console.error('Error populating enhanced details:', e);
+                        }
+
+                        var lat = p.location && p.location.coordinates && p.location.coordinates.latitude;
+                        var lng = p.location && p.location.coordinates && p.location.coordinates.longitude;
+
+                        // Handle MongoDB data format for coordinates
+                        if (lat && typeof lat === 'object' && lat.$numberDouble) {
+                            lat = lat.$numberDouble;
+                        }
+                        if (lng && typeof lng === 'object' && lng.$numberDouble) {
+                            lng = lng.$numberDouble;
+                        }
+
+
+                        var nlat = Number(lat);
+                        var nlng = Number(lng);
+
+
+                        if (!isFinite(nlat) || !isFinite(nlng)) {
+                            console.warn('Invalid coordinates, using defaults');
+                            nlat = lat; nlng = lng; // Let initMap handle defaults
+                        } else {
+                            // If coordinates look swapped, fix them
+                            if (Math.abs(nlat) > 90 && Math.abs(nlng) <= 90) {
+                                console.warn('Coordinates appear swapped, fixing...');
+                                var tmp = nlat; nlat = nlng; nlng = tmp;
+                            }
+                        }
+
+
+                        var address = (p.location && p.location.address) || 'Property Location';
+
+                        // ✅ Initialize map with lat, lng and dynamic address
+                        initMap(nlat, nlng, address);
+
+                        // Initialize map only after Google Maps API is ready
+                        function safeInit() {
+                            try {
+
+                                if (typeof google === 'undefined' || !google.maps) {
+                                    console.error('Google Maps API not loaded');
+                                    return;
+                                }
+
+                                if (!document.getElementById('contactMap')) {
+                                    console.error('Map container not found');
+                                    return;
+                                }
+
+                                initMap(nlat, nlng);
+                            } catch (e) {
+                                console.error('Map init failed in safeInit:', e);
+                            }
+                        }
+
+                        // Wait for Google Maps API and DOM to be ready
+                        function waitForMapsAPI() {
+
+                            if (typeof google !== 'undefined' && google.maps && document.getElementById('contactMap')) {
+                                safeInit();
+                            } else {
+                                setTimeout(waitForMapsAPI, 100);
+                            }
+                        }
+
+                        // Start waiting for dependencies
+                        waitForMapsAPI();
+
+                        // Dynamic configuration from BHK
+                        // Dynamic configuration block removed for Land Only
+                        // try { if (p.type === 'house' ... ) ... } catch (e) { ... }
+                    })
+                    .catch(function (e) { console.error('Failed to load property', e); });
+            }
+
+            document.addEventListener('DOMContentLoaded', load);
+        })();
+
+
+    </script>
+    <style>
+        .pd-header {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 14px
+        }
+
+        .pd-title {
+            margin: 0 0 6px 0
+        }
+
+        .pd-location {
+            margin: 0;
+            color: #6c757d
+        }
+
+        .pd-price {
+            margin: 0;
+            color: #28a745;
+            font-weight: 700
+        }
+
+        .property-gallery-wrap {
+            position: relative
+        }
+
+        .property-gallery-slider {
+            display: flex;
+            overflow: hidden;
+            border-radius: 8px
+        }
+
+        .property-gallery-slider .pg-slide {
+            min-width: 100%
+        }
+
+        .property-gallery-slider img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 8px
+        }
+
+        .property-gallery-thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            overflow-x: auto
+        }
+
+        .property-gallery-thumbs .pg-thumb {
+            flex: 0 0 120px;
+            cursor: pointer;
+            opacity: .75;
+            border: 2px solid transparent;
+            border-radius: 6px
+        }
+
+        .property-gallery-thumbs .pg-thumb.active {
+            opacity: 1;
+            border-color: #007bff
+        }
+
+        .property-gallery-thumbs img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px
+        }
+
+        /* Ensure configuration numbers/text are dark */
+        .properties-condition .condition li {
+            color: #212529
+        }
+
+        .properties-condition .condition li i {
+            color: #212529;
+            margin-right: 6px
+        }
+
+        .properties-condition .condition li span {
+            color: #212529 !important
+        }
+
+        /* Ensure Property Details section text is dark */
+        .property-details ul li {
+            color: #000000 !important
+        }
+
+        .property-details ul li strong {
+            color: #000000 !important
+        }
+
+        .property-details ul li span {
+            color: #000000 !important
+        }
+
+        /* Property location text color */
+        .pd-location {
+            color: #000000 !important;
+        }
+
+        .pd-location i {
+            color: #000000 !important;
+        }
+
+        #propAddress {
+            color: #000000 !important;
+        }
+
+
+
+        /* Enhanced Property Details Styles */
+        .property-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .property-details .heading-2 {
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .property-details .heading-2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #007bff, #28a745);
+            border-radius: 2px;
+        }
+
+        .property-details .row {
+            margin: 0 -15px;
+        }
+
+        .property-details .col-md-4 {
+            padding: 0 15px;
+        }
+
+        .property-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-details ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #007bff, #28a745);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .property-details ul:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-details ul:hover::before {
+            opacity: 1;
+        }
+
+        .property-details li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .property-details li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .property-details li strong {
+            color: #495057;
+            font-weight: 600;
+            min-width: 100px;
+            margin-right: 15px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .property-details li span {
+            color: #007bff;
+            font-weight: 500;
+            font-size: 14px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Icon styling for property details */
+        .property-details li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #007bff, #28a745);
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .property-details li:hover::before {
+            transform: scale(1.2);
+            background: linear-gradient(135deg, #28a745, #007bff);
+        }
+
+        /* Responsive enhancements */
+        @media (max-width: 768px) {
+            .property-details {
+                padding: 20px;
+                margin-bottom: 30px !important;
+            }
+
+            .property-details .heading-2 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .property-details ul {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .property-details li strong {
+                min-width: 80px;
+                font-size: 12px;
+            }
+
+            .property-details li span {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .property-details {
+                padding: 15px;
+            }
+
+            .property-details .col-md-6 {
+                margin-bottom: 15px;
+            }
+
+            .property-details li strong {
+                min-width: 70px;
+            }
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Locatex | Buy & Sell Real Estate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/map.css" type="text/css">
+    <script src="js/env.js"></script>
+    <!-- Ensure jQuery is loaded early to prevent '$ is not defined' -->
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="css/skins/default.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CRoboto:300,400,500,700&display=swap">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Auth Check -->
+    <script>
+        (function() {
+            const token = localStorage.getItem('auth_token') || localStorage.getItem('token') || localStorage.getItem('user_token');
+            if (!token) {
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="page_loader"></div>
+
+    <!-- Header Include -->
+    <div id="header-container"></div>
+
+
+
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="container">
+            <div class="page-name">
+                <h1 style="color: #000 !important;">Submit Property</h1>
+                <ul style="color: #000 !important;">
+                    <li><a href="index.html" style="color: #000 !important;">Index</a></li>
+                    <li><span style="color: #000 !important;">/</span><span style="color: #000 !important;">Submit
+                            Property</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Property start -->
+    <div class="submit-property content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="submit-address">
+                        <form method="GET">
+                            <h3 class="heading-2">Basic Information</h3>
+                            <div class="search-contents-sidebar mb-30">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-group">
+                                            <label>Property Name <span style="color: red;">*</span>
+                                            </label>
+                                            <input type="text" class="input-text" name="title" id="title"
+                                                placeholder="Enter property name" required>
+                                        </div>
+                                    </div>
+                                    <!-- Hidden Inputs for Land-Only / Sell-Only Mode -->
+                                    <input type="hidden" id="status" name="status" value="for-sale">
+                                    <input type="hidden" id="propertyType" name="type" value="land">
+                                    
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-group">
+                                            <label>Who is inserting this property? <span style="color: red;">*</span></label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="insertedBy" id="insertedByOwner" value="Owner" checked>
+                                                <label class="form-check-label" for="insertedByOwner">Owner</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="insertedBy" id="insertedByBroker" value="Broker">
+                                                <label class="form-check-label" for="insertedByBroker">Broker</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Area (Acres) <span style="color: red;">*</span></label>
+                                            <input type="number" class="form-control" name="totalAreaAcres"
+                                                id="totalAreaAcres" placeholder="Enter area in Acres" step="0.001"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Price <span style="color: red;">*</span></label>
+                                            <input type="number" class="input-text" name="price" id="price"
+                                                placeholder="Enter price" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="heading-2">Property Gallery (8-10 Photos)</h3>
+                            <div id="myDropZone" class="dropzone dropzone-design mb-50">
+                                <div class="dz-default dz-message">
+                                    <span>Drop files here to upload (8-10 photos recommended)</span>
+                                    <p class="text-muted">Supported formats: JPG, PNG, GIF. Max 5MB per image.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="heading-2">Location</h3>
+                            <div class="row mb-30">
+                                <!-- State (fixed to Gujarat) -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>State <span style="color: red;">*</span></label>
+                                        <select class="selectpicker search-fields" name="state" id="state" required>
+                                            <option value="gujarat" selected>Gujarat</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- District -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>District <span style="color: red;">*</span></label>
+                                        <select class="selectpicker search-fields" data-live-search="true"
+                                            name="district" id="district" required>
+                                            <option value="">Select District</option>
+                                            <option value="Banaskantha">Banaskantha</option>
+                                            <option value="Aravalli">Aravalli</option>
+                                            <option value="Patan">Patan</option>
+                                            <option value="Gandhinagar">Gandhinagar</option>
+                                            <option value="Mehsana">Mehsana</option>
+                                            <option value="Sabarkantha">Sabarkantha</option>
+                                            <option value="Vav-Tharad">Vav-Tharad</option>
+                                            <option value="Ahmedabad">Ahmedabad</option>
+                                            <option value="Anand">Anand</option>
+                                            <option value="Chhota Udaipur">Chhota Udaipur</option>
+                                            <option value="Dahod">Dahod</option>
+                                            <option value="Kheda">Kheda</option>
+                                            <option value="Mahisagar">Mahisagar</option>
+                                            <option value="Panchmahal">Panchmahal</option>
+                                            <option value="Vadodara">Vadodara</option>
+                                            <option value="Surat">Surat</option>
+                                            <option value="Bharuch">Bharuch</option>
+                                            <option value="Dang">Dang</option>
+                                            <option value="Narmada">Narmada</option>
+                                            <option value="Navsari">Navsari</option>
+                                            <option value="Tapi">Tapi</option>
+                                            <option value="Valsad">Valsad</option>
+                                            <option value="Rajkot">Rajkot</option>
+                                            <option value="Amreli">Amreli</option>
+                                            <option value="Bhavnagar">Bhavnagar</option>
+                                            <option value="Botad">Botad</option>
+                                            <option value="Devbhoomi Dwarka">Devbhoomi Dwarka</option>
+                                            <option value="Gir Somnath">Gir Somnath</option>
+                                            <option value="Jamnagar">Jamnagar</option>
+                                            <option value="Junagadh">Junagadh</option>
+                                            <option value="Kutch">Kutch</option>
+                                            <option value="Morbi">Morbi</option>
+                                            <option value="Porbandar">Porbandar</option>
+                                            <option value="Surendranagar">Surendranagar</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $('.selectpicker').selectpicker('refresh');
+                                    });
+                                </script>
+
+
+                                <!-- Taluka -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Taluka <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="taluka" id="taluka"
+                                            placeholder="Enter Taluka" required>
+                                    </div>
+                                </div>
+
+
+                                <!-- Village -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Village <span style="color: red;">*</span></label>
+                                        <input type="text" class="input-text" name="village" id="village"
+                                            placeholder="Enter village name" required>
+                                    </div>
+                                </div>
+
+                                <!-- Pincode -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Pincode <span style="color: red;">*</span></label>
+                                        <input type="text" class="input-text" name="pincode" id="pincode"
+                                            placeholder="Enter pincode" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    const gujaratData = {
+                                        "Ahmedabad": ["Daskroi", "Sanand", "Ahmedabad City"],
+                                        "Surat": ["Chorasi", "Palsana", "Surat City"],
+                                        "Vadodara": ["Savli", "Padra", "Vadodara City"],
+                                        "Rajkot": ["Kotda Sangani", "Rajkot City", "Lodhika"],
+                                    };
+
+                                    // Populate districts
+                                    const districtSelect = $('#district');
+                                    const talukaSelect = $('#taluka');
+
+                                    Object.keys(gujaratData).forEach(district => {
+                                        districtSelect.append(`<option value="${district}">${district}</option>`);
+                                    });
+
+                                    // Update talukas when district changes
+                                    districtSelect.on('change', function () {
+                                        const selectedDistrict = $(this).val();
+                                        talukaSelect.empty().append('<option value="">Select Taluka</option>');
+                                        if (selectedDistrict && gujaratData[selectedDistrict]) {
+                                            gujaratData[selectedDistrict].forEach(taluka => {
+                                                talukaSelect.append(`<option value="${taluka}">${taluka}</option>`);
+                                            });
+                                        }
+                                        talukaSelect.selectpicker('refresh');
+                                    });
+
+                                    // Initialize Bootstrap selectpicker
+                                    $('.selectpicker').selectpicker('refresh');
+                                });
+                            </script>
+
+
+                            <!-- Google Maps Location Picker - REMOVED -->
+                            <input type="hidden" name="latitude" id="latitude" value="0">
+                            <input type="hidden" name="longitude" id="longitude" value="0">
+
+                            <!-- Land Specific Questions -->
+                            <div id="amenitiesContainer">
+                                <h3 class="heading-2">Amenities</h3>
+
+                                <div class="row mb-40">
+                                    <!-- Basic Amenities -->
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="amenityFencing"
+                                                name="amenities[]" value="fencing">
+                                            <label class="form-check-label" for="amenityFencing">
+                                                Fencing / Boundary Wall
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="amenityHouse"
+                                                name="amenities[]" value="house">
+                                            <label class="form-check-label" for="amenityHouse">
+                                                House on Land
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="amenityElectricity"
+                                                name="amenities[]" value="electricity">
+                                            <label class="form-check-label" for="amenityElectricity">
+                                                Electricity Connection
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="amenityKuvo"
+                                                name="amenities[]" value="kuvo">
+                                            <label class="form-check-label" for="amenityKuvo">
+                                                Kuvo
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="amenityPipeline"
+                                                name="amenities[]" value="underground_pipeline">
+                                            <label class="form-check-label" for="amenityPipeline">
+                                                Underground Pipeline
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disadvantages Section -->
+                            <div id="disadvantagesContainer">
+                                <h3 class="heading-2">Disadvantages</h3>
+                                <div class="row mb-40">
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="disadvUndergroundLine"
+                                                name="disadvantages[]" value="Underground Cable / Line">
+                                            <label class="form-check-label" for="disadvUndergroundLine">
+                                                Underground Cable / Line
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="disadvBorewell"
+                                                name="disadvantages[]" value="Borewell / Well">
+                                            <label class="form-check-label" for="disadvBorewell">
+                                                Borewell / Well
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="disadvVijpool"
+                                                name="disadvantages[]" value="Passing Vijpool">
+                                            <label class="form-check-label" for="disadvVijpool">
+                                                Passing Vijpool
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="form-check amenity-check">
+                                            <input class="form-check-input" type="checkbox" id="disadvCanal"
+                                                name="disadvantages[]" value="Passing Canal">
+                                            <label class="form-check-label" for="disadvCanal">
+                                                Passing Canal
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Document Upload Section -->
+                            <!-- Document Upload Section -->
+                            <h3 class="heading-2">Property Details As Per Government Record</h3>
+
+                            <div class="row mb-40">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="form-group">
+                                        <label>Khaata Number <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="khaataNumber" id="khaataNumber"
+                                            placeholder="Enter Khaata Number" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="form-group">
+                                        <label>Survey Number <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="surveyNumber" id="surveyNumber"
+                                            placeholder="Enter Survey Number" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="form-group">
+                                        <label>Area (હે. આરે. ચો.મી. = ૦-૬૪-૭૫) <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="govArea" id="govArea"
+                                            placeholder="Example: 0-64-75" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="heading-2">Contact Details</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Name <span style="color: red;">*</span></label>
+                                        <input type="text" class="input-text" name="contactName" id="contactName" placeholder="Your Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email <span style="color: red;">*</span></label>
+                                        <input type="email" class="input-text" name="contactEmail" id="contactEmail" placeholder="Your Email"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phone Number <span style="color: red;">*</span></label>
+                                        <input type="tel" class="input-text" name="contactPhone" id="contactPhone" placeholder="Your Phone Number"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>WhatsApp Number</label>
+                                        <input type="tel" class="input-text" name="whatsappNumber" id="whatsappNumber"
+                                            placeholder="WhatsApp Number">
+                                    </div>
+                                </div>
+                            
+                            
+                            </div>
+
+                            <h3 class="heading-2">Detailed Information</h3>
+                            <div class="row mb-50">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <textarea class="input-text" name="message"
+                                            placeholder="Detailed Information"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-md button-theme mb-30" id="submitPropertyBtn">
+                                    <span id="submitText">Submit Property</span>
+                                    <span id="submitLoader" style="display: none;">
+                                        <i class="fa fa-spinner fa-spin"></i> Submitting...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Screen Loader Popup -->
+    <div id="fullscreenLoader" class="fullscreen-loader" style="display: none;">
+        <div class="loader-content">
+            <div class="loader-animation">
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+            </div>
+            <div class="loader-text">
+                <h3>Submitting Property...</h3>
+                <p>Please wait while we process your property details and upload files</p>
+                <div class="loader-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .fullscreen-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        .loader-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .loader-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            margin: 0 10px;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .loader-circle:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loader-circle:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        .loader-circle:nth-child(3) {
+            animation-delay: 0s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .loader-text h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .loader-text p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .loader-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 2px;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        /* Fix Google Places autocomplete dropdown text color */
+        .pac-container {
+            background-color: #fff !important;
+            border: 1px solid #ddd !important;
+            z-index: 9999 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .pac-item {
+            color: #333 !important;
+            background-color: #fff !important;
+            padding: 10px 12px !important;
+            border-bottom: 1px solid #eee !important;
+            cursor: pointer !important;
+        }
+
+        .pac-item:hover,
+        .pac-item-selected {
+            background-color: #f8f9fa !important;
+            color: #000 !important;
+        }
+
+        .pac-item-query {
+            color: #333 !important;
+            font-weight: 400 !important;
+        }
+
+        .pac-item-query strong,
+        .pac-matched {
+            color: #007bff !important;
+            font-weight: 600 !important;
+            background-color: rgba(0, 123, 255, 0.1) !important;
+            padding: 1px 2px !important;
+            border-radius: 2px !important;
+        }
+
+        .pac-icon {
+            margin-right: 8px !important;
+            filter: grayscale(0.3);
+            opacity: 0.8 !important;
+        }
+
+        /* Ensure all Google Places text is visible */
+        .pac-container * {
+            color: #333 !important;
+        }
+
+        .pac-container .pac-item-query strong {
+            color: #007bff !important;
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+                transform: translateX(-100%);
+            }
+
+            50% {
+                width: 100%;
+                transform: translateX(0%);
+            }
+
+            100% {
+                width: 100%;
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .loader-content {
+                padding: 20px;
+                max-width: 300px;
+            }
+
+            .loader-text h3 {
+                font-size: 20px;
+            }
+
+            .loader-text p {
+                font-size: 14px;
+            }
+        }
+
+        /* Map feedback animation */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            15% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            85% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+    </style>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer start -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Footer is now loaded automatically by js/app.js
+    </script>
+
+    <!-- jQuery loaded in header -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-submenu.js"></script>
+    <script src="js/rangeslider.js"></script>
+    <script src="js/jquery.mb.YTPlayer.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.scrollUp.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/jquery.filterizr.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- Google Maps API -->
+    <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual Google Maps API key -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASvsUsXr5DtzDSLKvk5Tzc439i8k3fOfM&libraries=places"></script>
+
+    <script>
+        // Property Type Change Handler
+        // Property Type Change Handler
+        // Property Type Change Handler - Removed as propertyType is hardcoded to 'land' and containers do not exist.
+
+
+
+        // City -> Map sync
+        document.addEventListener('DOMContentLoaded', function () {
+            var citySelect = document.getElementById('city');
+            var customCity = document.getElementById('customCity');
+
+            // Ensure "Other" option is always the last item and visible without search
+            (function ensureOtherLast() {
+                var opts = Array.prototype.slice.call(citySelect.options || []);
+                var otherIdx = opts.findIndex(function (o) { return o && o.value === 'Other'; });
+                if (otherIdx > -1 && otherIdx !== opts.length - 1) {
+                    var other = opts[otherIdx];
+                    citySelect.remove(otherIdx);
+                    citySelect.add(other);
+                }
+                if (window.jQuery && jQuery.fn.selectpicker) {
+                    jQuery('#city').selectpicker('refresh');
+                }
+            })();
+
+            function handleCityChange() {
+                var val = citySelect.value;
+                if (val === 'Other') {
+                    customCity.style.display = '';
+                    customCity.focus();
+                } else {
+                    customCity.style.display = 'none';
+                }
+            }
+
+            citySelect.addEventListener('changed.bs.select', handleCityChange);
+            citySelect.addEventListener('change', handleCityChange);
+
+            customCity.addEventListener('blur', function () {
+                if (customCity.value.trim()) {
+                    geocodeAndCenter(customCity.value.trim());
+                }
+            });
+
+            // When searching cities, if no results, show a quick action to use custom city
+            if (window.jQuery && jQuery.fn.selectpicker) {
+                var $city = jQuery('#city');
+                $city.on('shown.bs.select', function () {
+                    var picker = $city.data('selectpicker');
+                    if (!picker || !picker.$menu) return;
+                    var $menu = picker.$menu;
+                    var $search = $menu.find('.bs-searchbox input');
+                    // remove previous handlers
+                    $search.off('input.customCity');
+                    $search.on('input.customCity', function () {
+                        var q = (this.value || '').trim();
+                        // Wait for filter to render
+                        setTimeout(function () {
+                            var $no = $menu.find('li.no-results');
+                            // Create or update custom suggestion row
+                            var $custom = $menu.find('li.other-custom');
+                            if ($no.length && q) {
+                                if ($custom.length === 0) {
+                                    $custom = jQuery('<li class="other-custom"><a role="option" class="dropdown-item"></a></li>');
+                                    $menu.find('ul.inner').append($custom);
+                                    $custom.on('click', function (e) {
+                                        e.preventDefault();
+                                        // Select Other and set custom city value
+                                        $city.selectpicker('val', 'Other');
+                                        customCity.style.display = '';
+                                        // Read latest typed text from the live-search box to avoid truncation
+                                        var latest = ($menu.find('.bs-searchbox input').val() || '').trim();
+                                        customCity.value = latest || q;
+                                        customCity.focus();
+                                        picker.$button.click(); // close menu
+                                    });
+                                }
+                                $custom.find('a').text('Use custom city: "' + q + '"');
+                                $custom.show();
+                            } else if ($custom.length) {
+                                $custom.hide();
+                            }
+                        }, 0);
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+            const form = document.getElementById('propertyForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Detect edit mode
+            const isEditMode = !!propertyId;
+            if (isEditMode) {
+                submitBtn.textContent = 'Update Property';
+            }
+
+            const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+
+            // ---------------------------
+            // Load Property (Edit Mode)
+            // ---------------------------
+            if (isEditMode) {
+                if (!token) {
+                    alert('Please login to edit property.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`${API_BASE_URL}/api/properties/${propertyId}`, {
+                        headers: { 'Authorization': `Bearer ${token}` },
+                    });
+
+                    if (res.status === 401) {
+                        alert('Session expired. Please login again.');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    const data = await res.json();
+
+                    if (data.status === 'success') {
+                        const property = data.data.property;
+
+                        // Helper for safe setting of values
+                        const setVal = (id, val) => {
+                            const el = document.getElementById(id);
+                            if (el) el.value = (val === undefined || val === null) ? '' : val;
+                        };
+
+                        // Basic Information
+                        setVal('title', property.title);
+                        setVal('price', property.price);
+                        setVal('status', property.status);
+                        setVal('propertyType', property.type); // Correct ID is propertyType
+                        setVal('description', property.description);
+
+                        // Trigger property type change so dependent fields (like BHK) show up
+                        const pTypeEl = document.getElementById('propertyType');
+                        if (pTypeEl) {
+                            pTypeEl.dispatchEvent(new Event('change'));
+                        }
+
+                        // Area Details
+                        setVal('totalAreaVigha', property.areaVigha);
+                        setVal('totalAreaAcres', property.areaAcre);
+                        // If totalArea field exists (hidden or otherwise)
+                        setVal('totalArea', property.totalArea);
+
+                        // Location Details
+                        setVal('address', property.location?.address);
+                        setVal('city', property.location?.city);
+                        setVal('state', property.location?.state);
+                        setVal('district', property.location?.district);
+                        setVal('taluka', property.location?.taluka);
+                        setVal('village', property.location?.village);
+                        setVal('pincode', property.location?.zipCode); // Correct ID is pincode
+
+                        // Contact Details
+                        setVal('contactName', property.contactInfo?.name);
+                        setVal('contactEmail', property.contactInfo?.email);
+                        setVal('contactPhone', property.contactInfo?.phone);
+                        setVal('whatsappNumber', property.contactInfo?.whatsappNumber);
+
+                        // Refresh Selectpickers (for District, City etc)
+                        if (window.jQuery && jQuery.fn.selectpicker) {
+                            setTimeout(() => {
+                                jQuery('.selectpicker').selectpicker('refresh');
+                            }, 100);
+                        }
+
+                            // Amenities (Checkboxes)
+                            if (Array.isArray(property.amenities)) {
+                                // Reset first
+                                document.querySelectorAll('input[name="amenities[]"]').forEach(cb => cb.checked = false);
+                                property.amenities.forEach(a => {
+                                    const checkbox = document.querySelector(`input[name="amenities[]"][value="${a}"]`);
+                                    if (checkbox) checkbox.checked = true;
+                                });
+                            }
+
+                            // Disadvantages (Checkboxes)
+                            if (Array.isArray(property.disadvantages)) {
+                                document.querySelectorAll('input[name="disadvantages[]"]').forEach(cb => cb.checked = false);
+                                property.disadvantages.forEach(d => {
+                                    const checkbox = document.querySelector(`input[name="disadvantages[]"][value="${d}"]`);
+                                    if (checkbox) checkbox.checked = true;
+                                });
+                            }
+
+                            // Inserted By
+                            if (property.insertedBy) {
+                                const rb = document.querySelector(`input[name="insertedBy"][value="${property.insertedBy}"]`);
+                                if (rb) rb.checked = true;
+                            }
+
+                            // Gov Details
+                            if (property.govDetails) {
+                                setVal('khaataNumber', property.govDetails.khaataNumber);
+                                setVal('surveyNumber', property.govDetails.surveyNumber);
+                                setVal('govArea', property.govDetails.area);
+                            } else {
+                                // Fallback for legacy surveyNumber if it was stored at root
+                                if (!document.getElementById('surveyNumber').value && property.surveyNumber) {
+                                    setVal('surveyNumber', property.surveyNumber);
+                                }
+                            }
+
+
+
+                        /*
+                        // Initialize map if coordinates exist
+                        if (property.location?.coordinates) {
+                            const lat = Number(property.location.coordinates.latitude?.$numberDouble || property.location.coordinates.latitude);
+                            const lng = Number(property.location.coordinates.longitude?.$numberDouble || property.location.coordinates.longitude);
+                            if (!isNaN(lat) && !isNaN(lng)) {} // Map removed
+                        }
+                        */
+
+                        // Load existing images (if your Dropzone supports it)
+                        if (property.images?.length) {
+                            property.images.forEach(img => {
+                                const mockFile = { name: img.alt || 'Image', size: 12345, dataURL: img.url };
+                                myDropzone.emit('addedfile', mockFile);
+                                myDropzone.emit('thumbnail', mockFile, img.url);
+                                myDropzone.emit('complete', mockFile);
+                            });
+                        }
+                    } else {
+                        console.error('Failed to fetch property:', data.message);
+                    }
+                } catch (err) {
+                    console.error('Error loading property data:', err);
+                }
+            }
+
+        }); // End of DOMContentLoaded logic for Edit Mode population
+
+        // // Form validation
+
+
+        const myDropzone = new Dropzone("#myDropZone", {
+            url: "#",
+            paramName: "images",
+            maxFiles: 10,
+            maxFilesize: 5,
+            acceptedFiles: "image/*",
+            addRemoveLinks: true,
+            dictRemoveFile: "Remove",
+            previewsContainer: "#myDropZone",
+            clickable: true,
+            autoProcessQueue: false,
+            dictDefaultMessage: "Drop files here to upload (8-10 photos recommended)"
+        });
+
+        // Area is now in Acres only - no conversion needed
+
+        // --- Form Validation ---
+        function validateForm() {
+            const requiredFields = [
+                'title', 'status', 'propertyType', 'totalAreaAcres', 'price',
+                'state', 'district', 'taluka', 'village', 'pincode',
+                'contactName', 'contactEmail', 'contactPhone',
+                'khaataNumber', 'surveyNumber', 'govArea'
+            ];
+            for (let fieldId of requiredFields) {
+                const el = document.getElementById(fieldId);
+                if (!el || !el.value.trim()) {
+                    let label = "Field";
+                    // Try to find label
+                    if (el.closest('.form-group')) {
+                        const lbl = el.closest('.form-group').querySelector('label');
+                        if (lbl) label = lbl.textContent.replace('*', '').trim();
+                    }
+                    alert(`Please fill in the "${label}" field.`);
+                    el.focus();
+                    return false;
+                }
+            }
+            
+            // Validate "Inserted By"
+            const insertedBy = document.querySelector('input[name="insertedBy"]:checked');
+            if (!insertedBy) {
+                alert('Please select who is inserting this property (Owner or Broker).');
+                return false;
+            }
+
+            /*
+            const lat = document.getElementById('latitude').value;
+            const lng = document.getElementById('longitude').value;
+            if (!lat || !lng) {
+                alert('Please select a location on the map.');
+                return false;
+            }
+            */
+            return true;
+        }
+
+        // --- Submission Handler ---
+        document.getElementById('submitPropertyBtn').addEventListener('click', async function (e) {
+            e.preventDefault();
+            if (!validateForm()) return;
+
+            // Auth check
+            const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+            if (!token) {
+                alert('Please login first.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Edit mode detection
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+            const isEditMode = !!propertyId;
+
+            // Loader
+            const submitBtn = document.getElementById('submitPropertyBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitLoader.style.display = 'inline';
+
+            // Collect form data
+            const formData = new FormData();
+            // Basic Info
+            formData.append('title', document.getElementById('title').value);
+            formData.append('status', document.getElementById('status').value);
+            formData.append('type', document.getElementById('propertyType').value);
+            
+            // Inserted By
+            const insertedBy = document.querySelector('input[name="insertedBy"]:checked');
+            if (insertedBy) formData.append('insertedBy', insertedBy.value);
+
+            // Area in Acres only
+            const acres = document.getElementById('totalAreaAcres').value;
+            formData.append('totalArea', acres || '0');
+            formData.append('totalAreaAcres', acres);
+            formData.append('price', document.getElementById('price').value);
+
+            // Government Details
+            formData.append('khaataNumber', document.getElementById('khaataNumber').value);
+            formData.append('surveyNumber', document.getElementById('surveyNumber').value);
+            formData.append('govArea', document.getElementById('govArea').value);
+
+            // Location
+            const district = document.getElementById('district').value;
+            const taluka = document.getElementById('taluka').value;
+            const village = document.getElementById('village').value;
+            const pincode = document.getElementById('pincode').value; // HTML id is pincode
+
+            formData.append('district', district);
+            formData.append('taluka', taluka);
+            formData.append('village', village);
+            formData.append('pincode', pincode);
+
+            // Construct address from components if generic address field is missing
+            const addressEl = document.getElementById('address');
+            if (addressEl) {
+                formData.append('address', addressEl.value);
+            } else {
+                // Construct a fallback address
+                formData.append('address', `${village}, ${taluka}, ${district}, Gujarat`);
+            }
+
+            // Handle City logic (map to taluka or district if city input missing)
+            const cityEl = document.getElementById('city');
+            if (cityEl) {
+                // Existing city logic
+                let cityVal = cityEl.value;
+                const customCity = document.getElementById('customCity');
+                if (cityVal === 'Other' && customCity && customCity.value.trim()) {
+                    cityVal = customCity.value.trim();
+                }
+                formData.append('city', cityVal);
+            } else {
+                // Map city to Taluka or District as fallback
+                formData.append('city', taluka || district || 'Unknown');
+            }
+
+            formData.append('state', document.getElementById('state').value);
+            // formData.append('zipCode', pincode); // Backend handles 'pincode' mapping now
+            formData.append('latitude', '0');
+            formData.append('longitude', '0');
+
+            // Amenities
+            const amenities = [];
+            document.querySelectorAll('input[name="amenities[]"]:checked').forEach(cb => amenities.push(cb.value));
+            formData.append('amenities', JSON.stringify(amenities));
+
+            // Disadvantages
+            const disadvantages = [];
+            document.querySelectorAll('input[name="disadvantages[]"]:checked').forEach(cb => disadvantages.push(cb.value));
+            formData.append('disadvantages', JSON.stringify(disadvantages));
+
+            // Contact
+            formData.append('contactName', document.getElementById('contactName').value);
+            formData.append('contactEmail', document.getElementById('contactEmail').value);
+            formData.append('contactPhone', document.getElementById('contactPhone').value);
+            const whatsapp = document.getElementById('whatsappNumber').value;
+            if (whatsapp) formData.append('whatsappNumber', whatsapp);
+
+            // Detailed info
+            const desc = document.querySelector('textarea[name="message"]').value;
+            if (desc) formData.append('description', desc);
+
+            // Documents (optional)
+            const docIds = ['surveyNumber', 'document712', 'document8A', 'documentUtarotar', 'otherDocuments'];
+            docIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.files) {
+                    if (el.files.length > 0) {
+                        for (let f of el.files) formData.append(id, f);
+                    }
+                } else if (el && el.value) {
+                    formData.append(id, el.value);
+                }
+            });
+
+            // Images
+            const uploadedFiles = myDropzone.getAcceptedFiles();
+            uploadedFiles.forEach(file => formData.append('images', file));
+
+            // Submit
+            try {
+                const submitUrl = isEditMode ? `${API_BASE_URL}/api/properties/${propertyId}` : `${API_BASE_URL}/api/properties`;
+                const method = isEditMode ? 'PUT' : 'POST';
+                const response = await fetch(submitUrl, {
+                    method: method,
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoader.style.display = 'none';
+
+                if (response.ok && data.success) {
+                    alert(`Property ${isEditMode ? 'updated' : 'submitted'} successfully!`);
+                    window.location.href = 'my-properties.html';
+                } else {
+                    let msg = data.message || 'Unknown error';
+                    if (data.errors) msg += '\n' + data.errors.join('\n');
+                    alert(`Error ${isEditMode ? 'updating' : 'submitting'} property: ` + msg);
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoader.style.display = 'none';
+                console.error(err);
+                alert(`Error ${isEditMode ? 'updating' : 'submitting'} property. Please try again.`);
+            }
+        });
+    </script>
+
+    <style>
+        /* Scoped to submit property page only */
+        .submit-property .form-group label,
+        .submit-property .input-text,
+        .submit-property .form-control {
+            color: #000 !important;
+        }
+
+        /* Native selects */
+        .submit-property select.search-fields {
+            color: #000 !important;
+            background-color: #fff !important;
+        }
+
+        /* Bootstrap-select styled dropdowns */
+        .submit-property .bootstrap-select>.dropdown-toggle {
+            color: #000 !important;
+            background-color: #fff !important;
+        }
+
+        .submit-property .bootstrap-select .filter-option {
+            color: #000 !important;
+        }
+
+        .submit-property .bootstrap-select .dropdown-menu {
+            background-color: #fff !important;
+        }
+
+        .submit-property .bootstrap-select .dropdown-menu.inner li a span.text {
+            color: #000 !important;
+        }
+
+        .submit-property .bootstrap-select .dropdown-menu li a {
+            color: #000 !important;
+        }
+
+        /* Radio/checkbox labels inside submit property */
+        .submit-property .checkbox label,
+        .submit-property .radio label {
+            color: #000 !important;
+        }
+
+        /* Dropzone helper text */
+        .submit-property .dropzone .dz-message,
+        .submit-property .dropzone .dz-message span,
+        .submit-property .dropzone .dz-message p {
+            color: #000 !important;
+        }
+
+        /* Google Places Autocomplete dropdown - force readable colors */
+        .pac-container {
+            z-index: 99999 !important;
+            background: #fff !important;
+            color: #000 !important;
+        }
+
+        .pac-container .pac-item {
+            color: #000 !important;
+        }
+
+        .pac-container .pac-item .pac-icon {
+            filter: none !important;
+        }
+
+        .pac-container .pac-item .pac-item-query {
+            color: #000 !important;
+        }
+
+        .pac-container .pac-item:hover {
+            background: #f1f1f1 !important;
+        }
+    </style>
+
+</body>
+
+</html>

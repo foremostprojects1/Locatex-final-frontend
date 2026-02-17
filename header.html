@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Locatex | Buy & Sell Real Estate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="css/map.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="css/skins/default.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CRoboto:300,400,500,700&display=swap">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
+
+    <style>
+        /* Navbar Styling */
+        .navbar {
+            padding: 10px 0;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 18px;
+            margin: 0 2px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-item.active .nav-link {
+            background-color: #007bff;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: bold;
+        }
+
+        /* Enhanced Logo Styling */
+        .navbar-brand.logos img {
+            height: 100px; 
+            width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand.logos:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Center Navigation Items */
+        .navbar-nav.header-ml {
+            width: 100%;
+            justify-content: center;
+            display: flex;
+        }
+
+        .navbar-nav.header-ml .nav-item {
+            flex: none;
+        }
+
+        /* Enhanced Submit Property Button */
+        .navbar-nav.ml-auto .nav-link.link-btn {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            background-color: transparent;
+            color: #274abb;
+            border: 2px solid #274abb;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .navbar-nav.ml-auto .nav-link.link-btn:hover {
+            background-color: #274abb;
+            border-color: #274abb;
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Avatar Dropdown Styles */
+        .avatar-dropdown {
+            position: relative;
+        }
+
+        .avatar-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff 0%, #274abb 100%);
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .avatar-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .avatar-btn i {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .avatar-menu {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+            animation: slideDown 0.2s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar-dropdown.open .avatar-menu {
+            display: block;
+        }
+
+        .avatar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .avatar-menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .avatar-menu-item:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #007bff;
+        }
+
+        .avatar-menu-item i {
+            margin-right: 12px;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .avatar-menu-item.logout-item {
+            color: #dc3545;
+        }
+
+        .avatar-menu-item.logout-item:hover {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            color: #c82333;
+        }
+
+        .avatar-menu-item.create-account {
+            background: linear-gradient(135deg, #007bff 0%, #274abb 100%);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .avatar-menu-item.create-account:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #1e3a8a 100%);
+            color: #fff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .avatar-dropdown {
+                margin-top: 15px;
+                margin-left: 10px;
+            }
+
+            .avatar-menu {
+                right: auto;
+                left: 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="page_loader"></div>
+
+    <!-- Main header start -->
+    <header class="main-header" style="border-bottom: 1px solid #eee;">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand logos" href="index.html">
+                    <img src="img/logo.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav header-ml">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="properties-list-rightside.html">Properties</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="find-broker.html">Find a Broker</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto" style="align-items: center;">
+                        <li class="nav-item">
+                            <a href="submit-property.html" class="nav-link link-btn">Submit Property</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 15px;">
+                            <div class="avatar-dropdown" id="avatarDropdown">
+                                <div class="avatar-btn" onclick="toggleAvatarMenu()">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="avatar-menu" id="avatarMenu">
+                                    <!-- Logged Out State -->
+                                    <div id="loggedOutMenu">
+                                        <a href="login.html" class="avatar-menu-item">
+                                            <i class="fa fa-sign-in"></i> Login
+                                        </a>
+                                        <a href="signup.html" class="avatar-menu-item create-account">
+                                            <i class="fa fa-user-plus"></i> Create Account
+                                        </a>
+                                    </div>
+                                    <!-- Logged In State -->
+                                    <div id="loggedInMenu" style="display: none;">
+                                        <a href="my-profile.html" class="avatar-menu-item">
+                                            <i class="fa fa-user-circle"></i> My Profile
+                                        </a>
+                                        <a href="my-properties.html" class="avatar-menu-item">
+                                            <i class="fa fa-home"></i> My Properties
+                                        </a>
+                                        <a href="favorited-properties.html" class="avatar-menu-item">
+                                            <i class="fa fa-heart"></i> Favorites
+                                        </a>
+                                        <a href="#" class="avatar-menu-item logout-item"
+                                            onclick="handleLogout(); return false;">
+                                            <i class="fa fa-sign-out"></i> Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+</body>
+
+</html>
